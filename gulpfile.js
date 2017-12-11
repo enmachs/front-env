@@ -114,7 +114,7 @@ gulp.task('watch', ['browserSync', 'compile_haml', 'compile_sass', 'css', 'js'],
 });
 
 
-gulp.task('build', function (callback) {
+gulp.task('set', function (callback) {
   runSequence('clean:dist', 
     ['compile_haml','compile_sass', 'images', 'fonts', 'css', 'js']
   )
