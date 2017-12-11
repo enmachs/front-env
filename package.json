@@ -25,6 +25,7 @@
     "gulp-html-beautify": "^1.0.1",
     "gulp-imagemin": "^4.0.0",
     "gulp-sass": "^3.1.0",
+    "merge-stream": "^1.0.1",
     "run-sequence": "^2.2.0",
     "uncss": "^0.16.1"
   }
