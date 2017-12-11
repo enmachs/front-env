@@ -7,6 +7,7 @@ var cache = require('gulp-cache');
 var del = require('del');
 var runSequence = require('run-sequence');
 var uncss = require('uncss');
+var merge = require('merge-stream');
 //initialize server
 var browserSync = require('browser-sync').create();
 gulp.task('browserSync', function() {
@@ -22,6 +23,16 @@ gulp.task('browserSync', function() {
 gulp.task('clean:dist', function() {
   return del.sync('dist');
 })
+
+gulp.task('add_bootstrap', function(){
+  var bootstrap_js = gulp.src('node_modules/bootstrap/dist/js/bootstrap.js')
+  .pipe(gulp.dest('app/js'));
+
+  var bootstrap_css = gulp.src('node_modules/bootstrap/dist/css/bootstrap.min.css')
+  .pipe(gulp.dest('app/css'));
+
+  return merge(bootstrap_js, bootstrap_css)
+});
 
 
 
@@ -52,7 +63,22 @@ gulp.task('fonts', function() {
   return gulp.src('app/fonts/**/*')
   .pipe(gulp.dest('dist/fonts'))
 });
+//Move new .css files
+gulp.task('css', function() {
+  return gulp.src('app/css/**/*.css')
+  .pipe(gulp.dest('dist/css'))
+  .pipe(browserSync.reload({
+    stream: true
+  }))
+});
 
+gulp.task('js', function() {
+  return gulp.src('app/js/**/*.js')
+  .pipe(gulp.dest('dist/js'))
+  .pipe(browserSync.reload({
+    stream: true
+  }))
+});
 
 //Compile .scss to .css
 gulp.task('compile_sass', function(){
@@ -78,21 +104,23 @@ gulp.task('compile_haml', function(){
 
 
 //Watch function
-gulp.task('watch', ['browserSync', 'compile_haml', 'compile_sass'], function(){
+gulp.task('watch', ['browserSync', 'compile_haml', 'compile_sass', 'css', 'js'], function(){
   gulp.watch('app/scss/**/*.scss', ['compile_sass']);
   gulp.watch('app/*.haml', ['compile_haml']);
-  gulp.watch('app/js/**/*.js', browserSync.reload) 
+  gulp.watch('app/css/*.+(css|min.css)', ['css']);
+  gulp.watch('app/js/**/*.js', browserSync.reload)
+  gulp.watch('app/img/**/*.+(png|jpg|jpeg|gif|svg)', browserSync.reload) 
   // Other watchers
 });
 
 
 gulp.task('build', function (callback) {
   runSequence('clean:dist', 
-    ['compile_haml','compile_sass', 'images', 'fonts']
+    ['compile_haml','compile_sass', 'images', 'fonts', 'css', 'js']
   )
 });
 
 gulp.task('default', function (callback) {
-  runSequence(['compile_haml', 'compile_sass','browserSync', 'watch']
+  runSequence(['compile_haml', 'compile_sass', 'css', 'js', 'browserSync', 'watch']
   )
 });
