@@ -8,7 +8,7 @@ gulp set
 gulp
 ```
 
-## Adding bootstrap 4
+## Add bootstrap 4
 
 Install bootstrap running this command in your proyect folder
 ```
@@ -33,3 +33,5 @@ Compile and run your server again
 gulp prepare
 gulp
 ```
+
+## Remove bootstrap 4
