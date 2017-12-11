@@ -1,10 +1,10 @@
-# Frontend - Environmen
+# Frontend - Environment
 A simple environment for her
 
 ## Installing 
 Just run
 ```
-gulp prepare
+gulp set
 gulp
 ```
 
