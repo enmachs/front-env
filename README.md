@@ -30,7 +30,7 @@ Add links and scripts to your haml files
 
 Compile and run your server again
 ```
-gulp prepare
+gulp set
 gulp
 ```
 
