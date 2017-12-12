@@ -2,7 +2,11 @@
 A simple environment for her
 
 ## Installing 
-Just run
+Install gulp 
+```
+sudo npm install gulp -g
+```
+And run
 ```
 gulp set
 gulp
