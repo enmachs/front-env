@@ -23,7 +23,19 @@ gulp.task('browserSync', function() {
 gulp.task('clean:dist', function() {
   return del.sync('dist');
 })
+//------------ JQUERY
+gulp.task('add_jquery', function() {
+  return gulp.src('node_modules/jquery/dist/jquery.min.js')
+  .pipe(gulp.dest('app/js'));
+});
 
+gulp.task('remove_jquery', function(){
+  return del.sync(['app/js/jquery.min.js'])
+});
+
+//------------ END - JQUERY
+
+//------ BOOTSTRAP ---------
 gulp.task('add_bootstrap', function(){
   var bootstrap_js = gulp.src('node_modules/bootstrap/dist/js/bootstrap.js')
   .pipe(gulp.dest('app/js'));
@@ -34,7 +46,28 @@ gulp.task('add_bootstrap', function(){
   return merge(bootstrap_js, bootstrap_css)
 });
 
+gulp.task('remove_bootstrap', function(){
+  return del.sync(['app/css/bootstrap.min.css', 'app/js/bootstrap.js'])
+});
 
+//------ END BOOTSTRAP ----------
+
+
+//------ MATERIALIZE ----------
+
+gulp.task('add_materialize', function(){
+  var material_js = gulp.src('node_modules/materialize-css/dist/js/materialize.min.js')
+  .pipe(gulp.dest('app/js'));
+
+  var material_css = gulp.src('node_modules/materialize-css/sass/materialize.scss')
+  .pipe(sass())
+  .pipe(gulp.dest('app/css'));
+
+  return merge(material_js, material_css)
+});
+
+
+//------ END - MATERIALIZE ----
 
 //Save cache and minify images
 gulp.task('images', function(){
@@ -43,30 +76,19 @@ gulp.task('images', function(){
   .pipe(cache(imagemin({
       interlaced: true
     })))
-  .pipe(gulp.dest('dist/img'))
+  .pipe(gulp.dest('dist/assets/img'))
 });
 
-gulp.task('clean-css', function(){
-  var files = 'dist/*.html',
-  options = {
-    csspath: '',
-    stylesheets: ['css/main.css'],
-    htmlroot: 'dist',
-  };
-  return uncss(files, options, function (error, output) {
-    gulp.dest('dist/css/main.css')
-  });
-});
 
 //Move fonts to dist/fonts
 gulp.task('fonts', function() {
   return gulp.src('app/fonts/**/*')
-  .pipe(gulp.dest('dist/fonts'))
+  .pipe(gulp.dest('dist/assets/fonts'))
 });
 //Move new .css files
 gulp.task('css', function() {
   return gulp.src('app/css/**/*.css')
-  .pipe(gulp.dest('dist/css'))
+  .pipe(gulp.dest('dist/assets/css'))
   .pipe(browserSync.reload({
     stream: true
   }))
@@ -74,7 +96,7 @@ gulp.task('css', function() {
 
 gulp.task('js', function() {
   return gulp.src('app/js/**/*.js')
-  .pipe(gulp.dest('dist/js'))
+  .pipe(gulp.dest('dist/assets/js'))
   .pipe(browserSync.reload({
     stream: true
   }))
@@ -84,7 +106,7 @@ gulp.task('js', function() {
 gulp.task('compile_sass', function(){
   return gulp.src('app/scss/**/*.scss')
     .pipe(sass()) // Converts Sass to CSS with gulp-sass
-    .pipe(gulp.dest('dist/css'))
+    .pipe(gulp.dest('dist/assets/css'))
     .pipe(browserSync.reload({
       stream: true
     }))
