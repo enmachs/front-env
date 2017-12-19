@@ -6,7 +6,6 @@ var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
 var runSequence = require('run-sequence');
-var uncss = require('uncss');
 var merge = require('merge-stream');
 //initialize server
 var browserSync = require('browser-sync').create();
