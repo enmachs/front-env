@@ -16,7 +16,7 @@ gulp
 
 Install bootstrap running this command in your proyect folder
 ```
-npm install bootstrap@4.0.0-alpha.6
+npm install bootstrap@4.0.0-alpha.6 --save-dev
 ```
 
 
