@@ -17,14 +17,6 @@ gulp
 ```
 
 ## Add bootstrap 4
-First install jquery
-```
-npm install jquery --save-dev
-```
-And add it to your files
-```haml
-%script{src: "assets/js/jquery.min.js"}
-```
 Install bootstrap running this command in your proyect folder
 ```
 npm install bootstrap@4.0.0-alpha.6 --save-dev
@@ -67,14 +59,6 @@ gulp
 ```
 
 ## Add materialize
-First install jquery
-```
-npm install jquery --save-dev
-```
-And add it to your files
-```haml
-%script{src: "assets/js/jquery.min.js"}
-```
 Install materialie
 ```
 npm install materialize-css --save-dev
