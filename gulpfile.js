@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var haml = require('gulp-haml');
+var haml = require('gulp-ruby-haml');
 var htmlbeautify = require('gulp-html-beautify');
 var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
@@ -113,7 +113,7 @@ gulp.task('compile_sass', function(){
 
 gulp.task('compile_haml', function(){
   return gulp.src('app/*.haml')
-    .pipe(haml()) // Converts Haml to HTML with gulp-haml
+    .pipe(haml({doubleQuote: true})) // Converts Haml to HTML with gulp-haml
     .pipe(htmlbeautify({
       "indent_size": 2,
     }))
@@ -136,7 +136,7 @@ gulp.task('watch', ['browserSync', 'compile_haml', 'compile_sass', 'css', 'js'],
 
 
 gulp.task('set', function (callback) {
-  runSequence('clean:dist', 
+  runSequence('clean:dist', 'add_jquery'
     ['compile_haml','compile_sass', 'images', 'fonts', 'css', 'js']
   )
 });
