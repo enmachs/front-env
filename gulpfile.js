@@ -136,7 +136,7 @@ gulp.task('watch', ['browserSync', 'compile_haml', 'compile_sass', 'css', 'js'],
 
 
 gulp.task('set', function (callback) {
-  runSequence('clean:dist', 'add_jquery'
+  runSequence('clean:dist', 'add_jquery',
     ['compile_haml','compile_sass', 'images', 'fonts', 'css', 'js']
   )
 });
