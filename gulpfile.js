@@ -125,12 +125,13 @@ gulp.task('compile_haml', function(){
 
 
 //Watch function
-gulp.task('watch', ['browserSync', 'compile_haml', 'compile_sass', 'css', 'js'], function(){
+gulp.task('default', ['browserSync', 'compile_haml', 'compile_sass', 'css', 'js'], function(){
   gulp.watch('app/scss/**/*.scss', ['compile_sass']);
   gulp.watch('app/**/*.haml', ['compile_haml']);
   gulp.watch('app/css/*.+(css|min.css)', ['css']);
   gulp.watch('app/js/**/*.js', ['js']);
   gulp.watch('app/img/**/*.+(png|jpg|jpeg|gif|svg)', browserSync.reload);
+
   // Other watchers
 });
 
@@ -141,7 +142,11 @@ gulp.task('set', function (callback) {
   )
 });
 
-gulp.task('default', function (callback) {
-  runSequence(['compile_haml', 'compile_sass', 'css', 'js', 'browserSync', 'watch']
-  )
-});
+//gulp.task('default', function (callback) {
+//  runSequence(['compile_haml', 'compile_sass', 'css', 'js', 'browserSync', 'watch']
+//  )
+//});
+//gulp.task('default', function (callback) {
+
+//  runSequence('watch')
+//});
