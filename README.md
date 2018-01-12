@@ -15,6 +15,11 @@ And run
 gulp set
 gulp
 ```
+## Render partials
+To reduce code, create a file '_partial_name.haml' in partials folder and render wherever you want with this: 
+```
+= Haml::Engine.new(File.read('app/partials/_partial_name.haml')).render
+```
 
 ## Add bootstrap 4
 Install bootstrap running this command in your proyect folder
