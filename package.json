@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/EnmChs/front_end#readme",
   "devDependencies": {
+    "bourbon": "^5.0.0",
     "browser-sync": "^2.18.13",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
