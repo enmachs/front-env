@@ -129,8 +129,8 @@ gulp.task('watch', ['browserSync', 'compile_haml', 'compile_sass', 'css', 'js'],
   gulp.watch('app/scss/**/*.scss', ['compile_sass']);
   gulp.watch('app/*.haml', ['compile_haml']);
   gulp.watch('app/css/*.+(css|min.css)', ['css']);
-  gulp.watch('app/js/**/*.js', browserSync.reload)
-  gulp.watch('app/img/**/*.+(png|jpg|jpeg|gif|svg)', browserSync.reload) 
+  gulp.watch('app/js/**/*.js', ['js']);
+  gulp.watch('app/img/**/*.+(png|jpg|jpeg|gif|svg)', browserSync.reload);
   // Other watchers
 });
 
