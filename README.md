@@ -16,7 +16,7 @@ gulp set
 gulp
 ```
 ## Resources (Docs)
-- [Bourbon](https://www.bourbon.io/)
+- [Bourbon](https://www.bourbon.io/docs/latest/)
 - [Neat](https://neat.bourbon.io/docs/latest/)
 
 ## Render partials
