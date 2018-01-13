@@ -7,7 +7,8 @@ var cache = require('gulp-cache');
 var del = require('del');
 var runSequence = require('run-sequence');
 var merge = require('merge-stream');
-var bourbon = require('bourbon');
+var bourbon = require('bourbon').includePaths;
+var neat = require('neat').includePaths;
 //initialize server
 var browserSync = require('browser-sync').create();
 gulp.task('browserSync', function() {
@@ -106,7 +107,7 @@ gulp.task('js', function() {
 gulp.task('compile_sass', function(){
   return gulp.src('app/scss/**/*.scss')
     .pipe(sass({
-      includePaths: bourbon.includePaths
+      includePaths: [bourbon, neat]
     })) // Converts Sass to CSS with gulp-sass
     .pipe(gulp.dest('dist/assets/css'))
     .pipe(browserSync.reload({
