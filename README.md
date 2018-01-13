@@ -15,6 +15,10 @@ And run
 gulp set
 gulp
 ```
+## Resources (Docs)
+- [Bourbon](https://www.bourbon.io/)
+- [Neat](https://neat.bourbon.io/docs/latest/)
+
 ## Render partials
 To reduce code, create a file '_partial_name.haml' in partials folder and render wherever you want with this: 
 ```
