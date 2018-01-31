@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var haml = require('gulp-ruby-haml');
 var htmlbeautify = require('gulp-html-beautify');
+var cssbeautify = require('gulp-cssbeautify');
 var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
@@ -109,6 +110,9 @@ gulp.task('compile_sass', function(){
     .pipe(sass({
       includePaths: [bourbon, neat]
     })) // Converts Sass to CSS with gulp-sass
+    .pipe(cssbeautify({
+      indent: '  '
+    }))
     .pipe(gulp.dest('dist/assets/css'))
     .pipe(browserSync.reload({
       stream: true
