@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var haml = require('gulp-ruby-haml');
+// var haml = require('gulp-ruby-haml');
+var slim = require("gulp-slim");
 var htmlbeautify = require('gulp-html-beautify');
 var cssbeautify = require('gulp-cssbeautify');
 var imagemin = require('gulp-imagemin');
@@ -119,9 +120,14 @@ gulp.task('compile_sass', function(){
     }))
 });
 
-gulp.task('compile_haml', function(){
-  return gulp.src('app/*.haml')
-    .pipe(haml({doubleQuote: true})) // Converts Haml to HTML with gulp-haml
+gulp.task('compile_slim', function(){
+  return gulp.src('app/*.slim')
+    // .pipe(haml({doubleQuote: true})) // Converts Haml to HTML with gulp-haml
+    .pipe(slim({
+      pretty: true,
+      include: true,
+      options: "include_dirs=['app/partials/']"
+    }))
     .pipe(htmlbeautify({
       "indent_size": 2,
     }))
@@ -133,9 +139,9 @@ gulp.task('compile_haml', function(){
 
 
 //Watch function
-gulp.task('default', ['browserSync', 'compile_haml', 'compile_sass', 'css', 'js'], function(){
+gulp.task('default', ['browserSync', 'compile_slim', 'compile_sass', 'css', 'js'], function(){
   gulp.watch('app/scss/**/*.scss', ['compile_sass']);
-  gulp.watch('app/**/*.haml', ['compile_haml']);
+  gulp.watch('app/**/*.slim', ['compile_slim']);
   gulp.watch('app/css/*.+(css|min.css)', ['css']);
   gulp.watch('app/js/**/*.js', ['js']);
   gulp.watch('app/img/**/*.+(png|jpg|jpeg|gif|svg)', browserSync.reload);
@@ -146,7 +152,7 @@ gulp.task('default', ['browserSync', 'compile_haml', 'compile_sass', 'css', 'js'
 
 gulp.task('set', function (callback) {
   runSequence('clean:dist', 'add_jquery',
-    ['compile_haml','compile_sass', 'images', 'fonts', 'css', 'js']
+    ['compile_slim','compile_sass', 'images', 'fonts', 'css', 'js']
   )
 });
 

@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EnmChs/front_end.git"
+    "url": "git+https://github.com/enmachs/front_end.git"
   },
   "author": "EnmChs",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/EnmChs/front_end/issues"
+    "url": "https://github.com/enmachs/front_end/issues"
   },
-  "homepage": "https://github.com/EnmChs/front_end#readme",
+  "homepage": "https://github.com/enmachs/front_end#readme",
   "devDependencies": {
     "bourbon": "^5.0.0",
     "bourbon-neat": "^2.1.0",
@@ -26,8 +26,8 @@
     "gulp-cssbeautify": "^1.0.0",
     "gulp-html-beautify": "^1.0.1",
     "gulp-imagemin": "^4.0.0",
-    "gulp-ruby-haml": "0.0.9",
     "gulp-sass": "^3.1.0",
+    "gulp-slim": "^0.3.0",
     "jquery": "^3.2.1",
     "merge-stream": "^1.0.1",
     "run-sequence": "^2.2.0"
