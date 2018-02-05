@@ -18,6 +18,7 @@ gulp
 ## Resources (Docs)
 - [Bourbon](https://www.bourbon.io/docs/latest/)
 - [Neat](https://neat.bourbon.io/docs/latest/)
+- [Slim](https://github.com/slim-template/slim/)
 
 ## Render partials
 To reduce code, create a file 'partial_name.slim' in partials folder and render wherever you want with this: 
