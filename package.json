@@ -4,7 +4,9 @@
   "description": "Frontend environment for her",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "standard",
+    "compile": "gulp set",
+    "dev": "gulp set && gulp"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
     "gulp-slim": "^0.3.0",
     "jquery": "^3.2.1",
     "merge-stream": "^1.0.1",
-    "run-sequence": "^2.2.0"
+    "run-sequence": "^2.2.0",
+    "standard": "^14.3.3"
   }
 }
