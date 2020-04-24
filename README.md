@@ -1,8 +1,8 @@
 # Frontend - Environment
-A simple environment for her
+A simple frontend environment for her
 
-## Installing 
-Install gulp 
+## Installing
+Install gulp
 ```
 sudo npm install gulp -g
 ```
@@ -22,7 +22,7 @@ gulp
 - [Html2Slim](https://html2slim.herokuapp.com/)
 
 ## Render partials
-To reduce code, create a file 'partial_name.slim' in partials folder and render wherever you want with this: 
+To encapsulate code, create a file 'partial_name.slim' in partials folder and render wherever you want with this:
 (We recommend to create all partials inside partial's folder)
 ```
 include partial_name

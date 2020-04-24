@@ -1,5 +1,5 @@
 {
-  "name": "front_end",
+  "name": "front-env",
   "version": "1.0.0",
   "description": "An evironment for her",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/enmachs/front_end.git"
+    "url": "git+https://github.com/enmachs/front-env.git"
   },
-  "author": "EnmChs",
+  "author": "enmachs@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/enmachs/front_end/issues"
+    "url": "https://github.com/enmachs/front-env/issues"
   },
-  "homepage": "https://github.com/enmachs/front_end#readme",
+  "homepage": "https://github.com/enmachs/front-env#readme",
   "devDependencies": {
     "bourbon": "^5.0.0",
     "bourbon-neat": "^2.1.0",
