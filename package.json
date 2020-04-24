@@ -1,7 +1,7 @@
 {
   "name": "front-env",
   "version": "1.0.0",
-  "description": "An evironment for her",
+  "description": "Frontend environment for her",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,7 +18,6 @@
   "homepage": "https://github.com/enmachs/front-env#readme",
   "devDependencies": {
     "bourbon": "^5.0.0",
-    "bourbon-neat": "^2.1.0",
     "browser-sync": "^2.18.13",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
