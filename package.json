@@ -20,17 +20,15 @@
   "homepage": "https://github.com/enmachs/front-env#readme",
   "devDependencies": {
     "bourbon": "7.0.0",
-    "browser-sync": "^2.18.13",
+    "browser-sync": "^2.26.7",
     "del": "^3.0.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-cache": "^1.0.1",
     "gulp-cssbeautify": "^1.0.0",
     "gulp-html-beautify": "^1.0.1",
     "gulp-imagemin": "^4.0.0",
-    "gulp-sass": "^3.1.0",
+    "gulp-sass": "^4.1.0",
     "gulp-slim": "^0.3.0",
-    "merge-stream": "^1.0.1",
-    "run-sequence": "^2.2.0",
     "standard": "^14.3.3"
   }
 }
