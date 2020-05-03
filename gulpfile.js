@@ -11,9 +11,9 @@ const slim = require('gulp-slim')
 // Initialize hotreload server
 const browserSync = require('browser-sync').create()
 
-function reload(done) {
-  browserSync.reload();
-  done();
+function reload (done) {
+  browserSync.reload()
+  done()
 }
 
 const server = function () {
@@ -59,7 +59,7 @@ const js = function () {
 }
 
 // Compile .scss to .css
-const compile_sass = function () {
+const compileSass = function () {
   return src('app/scss/**/*.scss')
     .pipe(sass({
       includePaths: [bourbon]
@@ -71,7 +71,7 @@ const compile_sass = function () {
 }
 
 // Compile .slim files into .html
-const compile_slim = function () {
+const compileSlim = function () {
   return src('app/*.slim')
     .pipe(slim({
       pretty: true,
@@ -86,8 +86,8 @@ const compile_slim = function () {
 
 const watches = function (done) {
   server()
-  watch('app/**/*.slim', series(compile_slim, reload))
-  watch('app/scss/**/*.scss', series(compile_sass, reload))
+  watch('app/**/*.slim', series(compileSlim, reload))
+  watch('app/scss/**/*.scss', series(compileSass, reload))
   watch('app/css/*.+(css|min.css)', series(css, reload))
   watch('app/js/**/*.js', series(js, reload))
   watch('app/img/**/*.+(png|jpg|jpeg|gif|svg)', series(images, reload))
@@ -95,10 +95,10 @@ const watches = function (done) {
 }
 
 // Watch function
-task('default', series(compile_slim, compile_sass, css, js, watches))
+task('default', series(compileSlim, compileSass, css, js, watches))
 
 task('set',
   series(clean,
-    parallel(compile_slim, compile_sass, images, fonts, css, js)
+    parallel(compileSlim, compileSass, images, fonts, css, js)
   )
 )
