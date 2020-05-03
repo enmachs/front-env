@@ -1,82 +1,78 @@
-var bourbon = require('bourbon').includePaths
-var cache = require('gulp-cache')
-var cssbeautify = require('gulp-cssbeautify')
-var del = require('del')
-var gulp = require('gulp')
-var htmlbeautify = require('gulp-html-beautify')
-var imagemin = require('gulp-imagemin')
-var sass = require('gulp-sass')
-var slim = require('gulp-slim')
-var runSequence = require('run-sequence')
+const bourbon = require('bourbon').includePaths
+const cache = require('gulp-cache')
+const cssbeautify = require('gulp-cssbeautify')
+const del = require('del')
+const { task, series, src, dest, parallel, watch } = require('gulp')
+const htmlbeautify = require('gulp-html-beautify')
+const imagemin = require('gulp-imagemin')
+const sass = require('gulp-sass')
+const slim = require('gulp-slim')
 
 // Initialize hotreload server
-var browserSync = require('browser-sync').create()
-gulp.task('browserSync', function () {
+const browserSync = require('browser-sync').create()
+
+function reload (done) {
+  browserSync.reload()
+  done()
+}
+
+const server = function () {
   browserSync.init({
     server: {
       baseDir: 'dist'
     }
   })
-})
+}
 
 // Delete dist folder
-gulp.task('clean:dist', function () {
-  return del.sync('dist')
-})
+const clean = async function () {
+  const deleted = await del('dist')
+  console.log('files deleted ', deleted)
+}
 
 // Save cache and minify images
-gulp.task('images', function () {
-  return gulp.src('app/img/**/*.+(png|jpg|jpeg|gif|svg)')
+const images = function () {
+  return src('app/img/**/*.+(png|jpg|jpeg|gif|svg)')
   // Caching images that ran through imagemin
     .pipe(cache(imagemin({
       interlaced: true
     })))
-    .pipe(gulp.dest('dist/assets/img'))
-})
+    .pipe(dest('dist/assets/img'))
+}
 
 // Move fonts to dist/fonts
-gulp.task('fonts', function () {
-  return gulp.src('app/fonts/**/*')
-    .pipe(gulp.dest('dist/assets/fonts'))
-})
+const fonts = function () {
+  return src('app/fonts/**/*')
+    .pipe(dest('dist/assets/fonts'))
+}
 
 // Move new .css files
-gulp.task('css', function () {
-  return gulp.src('app/css/**/*.css')
-    .pipe(gulp.dest('dist/assets/css'))
-    .pipe(browserSync.reload({
-      stream: true
-    }))
-})
+const css = function () {
+  return src('app/css/**/*.css')
+    .pipe(dest('dist/assets/css'))
+}
 
 // Move new .js files
-gulp.task('js', function () {
-  return gulp.src('app/js/**/*.js')
-    .pipe(gulp.dest('dist/assets/js'))
-    .pipe(browserSync.reload({
-      stream: true
-    }))
-})
+const js = function () {
+  return src('app/js/**/*.js')
+    .pipe(dest('dist/assets/js'))
+}
 
 // Compile .scss to .css
-gulp.task('compile_sass', function () {
-  return gulp.src('app/scss/**/*.scss')
+const compileSass = function () {
+  return src('app/scss/**/*.scss')
     .pipe(sass({
       includePaths: [bourbon]
-    })) // Converts Sass to CSS with gulp-sass
+    })) // Converts Sass to CSS with sass
     .pipe(cssbeautify({
       indent: '  '
     }))
-    .pipe(gulp.dest('dist/assets/css'))
-    .pipe(browserSync.reload({
-      stream: true
-    }))
-})
+    .pipe(dest('dist/assets/css'))
+}
 
 // Compile .slim files into .html
-gulp.task('compile_slim', function () {
-  return gulp.src('app/*.slim')
-    // .pipe(haml({doubleQuote: true})) // Converts Haml to HTML with gulp-haml
+const compileSlim = function () {
+  return src('app/*.slim')
     .pipe(slim({
       pretty: true,
       include: true,
@@ -85,25 +81,24 @@ gulp.task('compile_slim', function () {
     .pipe(htmlbeautify({
       indent_size: 2
     }))
-    .pipe(gulp.dest('dist'))
-    .pipe(browserSync.reload({
-      stream: true
-    }))
-})
+    .pipe(dest('dist'))
+}
+
+const watches = function (done) {
+  server()
+  watch('app/**/*.slim', series(compileSlim, reload))
+  watch('app/scss/**/*.scss', series(compileSass, reload))
+  watch('app/css/*.+(css|min.css)', series(css, reload))
+  watch('app/js/**/*.js', series(js, reload))
+  watch('app/img/**/*.+(png|jpg|jpeg|gif|svg)', series(images, reload))
+  done()
+}
 
 // Watch function
-gulp.task('default', ['browserSync', 'compile_slim', 'compile_sass', 'css', 'js'], function () {
-  gulp.watch('app/scss/**/*.scss', ['compile_sass'])
-  gulp.watch('app/**/*.slim', ['compile_slim'])
-  gulp.watch('app/css/*.+(css|min.css)', ['css'])
-  gulp.watch('app/js/**/*.js', ['js'])
-  gulp.watch('app/img/**/*.+(png|jpg|jpeg|gif|svg)', browserSync.reload)
+task('default', series(compileSlim, compileSass, css, js, watches))
 
-  // Other watchers
-})
-
-gulp.task('set', function (callback) {
-  runSequence('clean:dist',
-    ['compile_slim', 'compile_sass', 'images', 'fonts', 'css', 'js']
+task('set',
+  series(clean,
+    parallel(compileSlim, compileSass, images, fonts, css, js)
   )
-})
+)
