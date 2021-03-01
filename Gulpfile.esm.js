@@ -4,4 +4,9 @@ const defaultTask = (cb) => {
   cb();
 }
 
+export const runIt = (done) => {
+  console.debug('Running it!');
+  done();
+}
+
 export default defaultTask;
