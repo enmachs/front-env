@@ -20,17 +20,18 @@
     "bourbon": "^5.0.0",
     "browser-sync": "^2.26.14",
     "del": "^3.0.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-cache": "^1.0.1",
     "gulp-cssbeautify": "^1.0.0",
     "gulp-html-beautify": "^1.0.1",
     "gulp-imagemin": "^4.0.0",
+    "gulp-ruby-haml": "0.0.9",
     "gulp-sass": "^3.1.0",
     "gulp-slim": "^0.3.0",
     "merge-stream": "^1.0.1",
     "run-sequence": "^2.2.0"
   },
   "dependencies": {
-    "gulp-ruby-haml": "0.0.9"
+    "esm": "^3.2.25"
   }
 }
