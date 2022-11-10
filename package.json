@@ -20,7 +20,7 @@
     "bourbon": "^5.0.0",
     "browser-sync": "^2.26.14",
     "del": "^3.0.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-cache": "^1.0.1",
     "gulp-cssbeautify": "^1.0.0",
     "gulp-html-beautify": "^1.0.1",
